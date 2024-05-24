@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as EgovNet from "api/egovFetch";
 import URL from "constants/url";
 import CODE from "constants/code";
@@ -8,26 +8,22 @@ import { default as EgovLeftNav } from "components/leftmenu/EgovLeftNavAdmin";
 function EgovRegister(props) {
   console.group("userRegister");
   console.log("[Start] userRegister ------------------------------");
-  console.log("EgovAdminPasswordUpdate [props] : ", props);
+  console.log("userRegister [props] : ", props);
 
-  const navigate = useNavigate();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const formData = new FormData();
+  formData.append("id", id);
+
   const formValidator = (formData) => {
-    if (formData.get("id") === null || formData.get("id") === "") {
+    console.log(formData.get("password"));
+    if (formData.get("id") === null) {
       alert("id는 필수 값입니다.");
       return false;
     }
-
-    //필수체크 완료된 경우만 적용되어야 함. 아이디중복확인 작업을 위해 주석처리
-    // if (formData.get("password") === null || formData.get("password") === "") {
-    //   alert("password는 필수 값입니다.");
-    //   return false;
-    // }
-
     return true;
   };
-
+  const [rscode, setRscode] = useState("");
   /* 아이디중복확인 start */
   const idCheck = () => {
     console.log("idCheck starts. parameter id : " + id);
@@ -51,18 +47,16 @@ function EgovRegister(props) {
         console.log("requestFetch Finished ====>");
         console.log(editURL);
         console.log(resp.resultCode);
+        setRscode(resp.resultCode);
         console.log(CODE.RCV_SUCCESS);
         console.log(URL.ERROR);
         console.log(resp.resultMessag);
-        if (Number(resp.resultCode) === Number(CODE.RCV_SUCCESS)) {
-          alert("OK 다음 로그인 시 신규 암호를 사용하세요.");
-          navigate({ pathname: URL.MAIN }, { replace: true });
-        } else {
-          alert("Fail 변경되지 않았습니다. 다시 시도해 주세요.");
-          navigate(
-            { pathname: URL.ERROR },
-            { state: { msg: resp.resultMessage } }
-          ); //에러메세지 변수명 변경
+        console.log(resp.resultCode);
+
+        if (resp.resultCode === 800) {
+          alert("해당 아이디는 이미 존재합니다. 다른 아이디를 입력하세요.");
+        } else if (resp.resultCode === 200) {
+          alert("해당 아이디는 사용 가능합니다.");
         }
       });
     }
@@ -76,8 +70,26 @@ function EgovRegister(props) {
 
     let requestOptions = {};
     const formData = new FormData();
+    formData.append("id", id);
     formData.append("password", password);
-    if (formValidator(formData)) {
+
+    const formValidator = (formData) => {
+      if (formData.get("id") === null) {
+        alert("id는 필수 값입니다.");
+        return false;
+      }
+      return true;
+    };
+
+    const formValidator2 = (formData) => {
+      if (formData.get("password") === null) {
+        alert("password는 필수 값입니다.");
+        return false;
+      }
+      return true;
+    };
+
+    if (formValidator(formData) && formValidator2(formData)) {
       requestOptions = {
         method: "POST",
         headers: {
@@ -89,15 +101,19 @@ function EgovRegister(props) {
         }),
       };
       EgovNet.requestFetch(editURL, requestOptions, (resp) => {
-        if (Number(resp.resultCode) === Number(CODE.RCV_SUCCESS)) {
-          alert("OK 다음 로그인 시 신규 암호를 사용하세요.");
-          navigate({ pathname: URL.MAIN }, { replace: true });
-        } else {
-          alert("Fail 변경되지 않았습니다. 다시 시도해 주세요.");
-          navigate(
-            { pathname: URL.ERROR },
-            { state: { msg: resp.resultMessage } }
-          ); //에러메세지 변수명 변경
+        console.log("requestFetch Finished ====>");
+        console.log(editURL);
+        console.log(resp.resultCode);
+        setRscode(resp.resultCode);
+        console.log(CODE.RCV_SUCCESS);
+        console.log(URL.ERROR);
+        console.log(resp.resultMessag);
+        console.log(resp.resultCode);
+
+        if (resp.resultCode === 800) {
+          alert("회원등록 실패");
+        } else if (resp.resultCode === 200) {
+          alert("회원등록성공");
         }
       });
     }
@@ -193,6 +209,7 @@ function EgovRegister(props) {
                   <button
                     className="btn btn_skyblue_h46 w_100"
                     onClick={() => userRegister()}
+                    disabled={rscode === 200 ? false : true}
                   >
                     신청
                   </button>
