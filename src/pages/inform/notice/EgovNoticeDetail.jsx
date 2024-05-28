@@ -29,7 +29,6 @@ function EgovNoticeDetail(props) {
   const [boardAttachFiles, setBoardAttachFiles] = useState();
 
   const retrieveDetail = () => {
-    alert(bbsId + "    " + nttId);
     const retrieveDetailURL = `/board/${bbsId}/${nttId}`;
     const requestOptions = {
       method: "GET",
@@ -145,7 +144,6 @@ function EgovNoticeDetail(props) {
                     <EgovAttachFile boardFiles={boardAttachFiles} />
                   )}
               </div>
-
               <div className="board_btn_area">
                 {user.id && masterBoard.bbsUseFlag === "Y" && (
                   <div className="left_col btn3">

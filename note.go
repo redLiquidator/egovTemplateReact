@@ -36,6 +36,8 @@ VSCODE에서 주석: ctrl + /
 axios 사용참고: JWTContext.jsx
 
 # project template
+C:\VueReact\egovframe-template-simple-react-4.2.x
+C:\eGovFrameDev-4.2.0\workspace\egovframe-template-simple-backend-main
 
 1.동작 프로세스
   1.1 로그인
@@ -79,7 +81,9 @@ axios 사용참고: JWTContext.jsx
    1.3.3.2 상세(한건조회)
    EgovAdminNoticeDetail.jsx 에서 retrieveDetail 가 `/board/${bbsId}/${nttId}` 경로로 requestPatch. 해당 ADMIN_NOTICE_DETAIL
    @GetMapping(value = "/board/{bbsId}/{nttId}")
-   EgovBBSManageApiController.selectBBSMasterInf>EgovBBSAttributeManageService.selectBBSMasterInf>EgovBBSAttributeManageServiceImpl.selectBBSMasterInf>EgovBoard_SQL_mysql.xml 의 쿼리 id="selectBBSMasterInf"
+   EgovBBSManageApiController.selectBBSMasterInf>EgovBBSAttributeManageService.selectBBSMasterInf>EgovBBSAttributeManageServiceImpl.selectBBSMasterInf>EgovBoard_SQL_mysql.xml 의 쿼리 id=selectBoardArticle
+   (해당 쿼리가 게시글 상세를 2개이상 가져오는 쿼리오류가 있어서 DISTINCT를 쿼리에 추가)
+   id=selectBBSMasterInf 쿼리도 2개이상 가져오는 오류로 DISTINCT를 추가 
 
 2.frontend 
  2.1 이미지파일위치 /assets/images/
