@@ -72,6 +72,8 @@ function EgovRegister(props) {
     const formData = new FormData();
     formData.append("id", id);
     formData.append("password", password);
+    console.log(id);
+    console.log(password);
 
     const formValidator = (formData) => {
       if (formData.get("id") === null) {
