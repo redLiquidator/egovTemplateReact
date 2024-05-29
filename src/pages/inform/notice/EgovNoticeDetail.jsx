@@ -29,7 +29,6 @@ function EgovNoticeDetail(props) {
   const [boardAttachFiles, setBoardAttachFiles] = useState();
 
   const retrieveDetail = () => {
-    alert("retrieveDetail function starts");
     const retrieveDetailURL = `/board/${bbsId}/${nttId}`;
     const requestOptions = {
       method: "GET",
@@ -70,7 +69,6 @@ function EgovNoticeDetail(props) {
   };
 
   useEffect(function () {
-    alert("useEffect starts...");
     retrieveDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

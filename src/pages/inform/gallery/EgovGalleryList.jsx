@@ -8,7 +8,7 @@ import { GALLERY_BBS_ID } from "config";
 import { default as EgovLeftNav } from "components/leftmenu/EgovLeftNavInform";
 import EgovPaging from "components/EgovPaging";
 
-import { itemIdxByPage } from "utils/calc";
+// import { itemIdxByPage } from "utils/calc";
 
 function EgovGalleryList(props) {
   console.group("EgovGalleryList");
@@ -64,19 +64,21 @@ function EgovGalleryList(props) {
           </p>
         ); // 게시판 목록 초기값
 
-        const resultCnt = parseInt(resp.result.resultCnt);
+        // const resultCnt = parseInt(resp.result.resultCnt);
         const currentPageNo = resp.result.paginationInfo.currentPageNo;
         const pageSize = resp.result.paginationInfo.pageSize;
 
         // 리스트 항목 구성
         resp.result.resultList.forEach(function (item, index) {
           if (index === 0) mutListTag = []; // 목록 초기화
-          const listIdx = itemIdxByPage(
-            resultCnt,
-            currentPageNo,
-            pageSize,
-            index
-          );
+          // const listIdx = itemIdxByPage(
+          //   resultCnt,
+          //   currentPageNo,
+          //   pageSize,
+          //   index
+          // );
+
+          const listIdx = (currentPageNo - 1) * pageSize + index + 1;
 
           mutListTag.push(
             <Link
@@ -221,7 +223,7 @@ function EgovGalleryList(props) {
             {/* <!-- 게시판목록 --> */}
             <div className="board_list BRD002">
               <div className="head">
-                <span>번호</span>
+                <span>g번호</span>
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
