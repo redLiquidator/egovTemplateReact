@@ -220,7 +220,7 @@ function EgovNoticeList(props) {
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
-                <span>조회수</span>
+                <span>조회수@</span>
               </div>
               <div className="result">{listTag}</div>
             </div>

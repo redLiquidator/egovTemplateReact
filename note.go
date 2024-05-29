@@ -70,7 +70,7 @@ C:\eGovFrameDev-4.2.0\workspace\egovframe-template-simple-backend-main
    1.3.3 알림마당>공지사항
    1.3.3.1 공지사항 목록 (case1.메인화면에서 case2.알림마당에서 )
    EgovMain.jsx에서 <ul>{noticeListTag}</ul> 가 목록을 가져온다.
-   EgovNoticeList.jsx 가 목록을 보여준다. 
+   EgovNoticeList.jsx 에서 <div className="result">{listTag}</div>가 목록을 가져온다. 
   
    이 리스트는 pathname: URL.INFORM_NOTICE_DETAIL	 에서 가져온다. 
    (해당 ADMIN_NOTICE_DETAIL 에 매핑되는 element 인 EgovAdminNoticeDetail 은 index.jsx 에서 가져온다.)
@@ -82,10 +82,17 @@ C:\eGovFrameDev-4.2.0\workspace\egovframe-template-simple-backend-main
    EgovAdminNoticeDetail.jsx 에서 retrieveDetail 가 `/board/${bbsId}/${nttId}` 경로로 requestPatch. 해당 ADMIN_NOTICE_DETAIL
    @GetMapping(value = "/board/{bbsId}/{nttId}")
    EgovBBSManageApiController.selectBBSMasterInf>EgovBBSAttributeManageService.selectBBSMasterInf>EgovBBSAttributeManageServiceImpl.selectBBSMasterInf>EgovBoard_SQL_mysql.xml 의 쿼리 id=selectBoardArticle
-   (해당 쿼리가 게시글 상세를 2개이상 가져오는 쿼리오류가 있어서 DISTINCT를 쿼리에 추가)
-   id=selectBBSMasterInf 쿼리도 2개이상 가져오는 오류로 DISTINCT를 추가 
-
-2.frontend 
+   2024.06.28 해당 쿼리가 게시글 상세를 2개이상 가져오는 쿼리오류가 있어서 DISTINCT를 쿼리에 추가
+   2024.06.28 id=selectBBSMasterInf 쿼리도 2개이상 가져오는 오류로 DISTINCT를 추가 
+   2024.06.29 게시글목록 조회시 중복 결과가 나오는 이슈 ->
+                쿼리 id = selectBoardArticleList 에 DISTINCT를 추가
+   2024.06.29 조회수 2+ 이상 증가하는 이슈
+   조회수 파라미터명: inqireCo
+   조회수 업데이트쿼리:  updateInqireCo 
+   조회수 확인쿼리:@GetMapping(value = "/board") selectBoardArticles >selectBoardArticle> BBSManageDAO >selectMaxInqireCo 
+   2024.06.29 게시판 목록번호가 1,2,3... 이 아니라 45,44,43... 으로 나오는 이슈
+   
+   2.frontend 
  2.1 이미지파일위치 /assets/images/
  2.2 url등록 
 	url.js
