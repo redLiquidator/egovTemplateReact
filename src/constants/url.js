@@ -36,6 +36,7 @@ const URL = {
   INFORM_NOTICE_DETAIL: "/inform/notice/detail", // 알림마당/공지사항상세
   INFORM_NOTICE_CREATE: "/inform/notice/create", // 알림마당/공지사항등록
   INFORM_NOTICE_MODIFY: "/inform/notice/modify", // 알림마당/공지사항수정
+  INFORM_NOTICE_DELETE: "/inform/notice/delete", // 알림마당/공지사항삭제
   INFORM_NOTICE_REPLY: "/inform/notice/reply", // 알림마당/공지사항답글
   INFORM_GALLERY: "/inform/gallery", // 알림마당/사이트갤러리
   INFORM_GALLERY_DETAIL: "/inform/gallery/detail", // 알림마당/사이트갤러리상세

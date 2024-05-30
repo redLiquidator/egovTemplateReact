@@ -12,6 +12,7 @@ function EgovHeader() {
   console.log("[Start] EgovHeader ------------------------------");
 
   const sessionUser = getSessionItem("loginUser");
+
   const sessionUserId = sessionUser?.id;
   const sessionUserName = sessionUser?.name;
   const sessionUserSe = sessionUser?.userSe;
@@ -133,8 +134,8 @@ function EgovHeader() {
           {/* 로그아웃 : 로그인 정보 있을때 */}
           {sessionUserId && (
             <>
-              <span className="person">{sessionUserName} </span> 님이, 관리자로
-              로그인하셨습니다.
+              <span className="person">{sessionUserId} </span> 님이,{" "}
+              {sessionUserName}로 로그인하셨습니다.
               <button onClick={logOutHandler} className="btn">
                 로그아웃
               </button>

@@ -120,7 +120,7 @@ function EgovAdminNoticeDetail(props) {
                     <dd>{boardDetail && boardDetail.frstRegisterPnttm}</dd>
                   </dl>
                   <dl>
-                    <dt>조회수</dt>
+                    <dt>조회수a</dt>
                     <dd>{boardDetail && boardDetail.inqireCo}</dd>
                   </dl>
                 </div>
@@ -167,7 +167,7 @@ function EgovAdminNoticeDetail(props) {
                         );
                       }}
                     >
-                      삭제
+                      삭제1
                     </a>
                     {masterBoard.replyPosblAt === "Y" && (
                       <Link
@@ -183,7 +183,37 @@ function EgovAdminNoticeDetail(props) {
                     )}
                   </div>
                 )}
+
                 <div className="right_col btn1">
+                  <Link
+                    to={{ pathname: URL.INFORM_NOTICE_MODIFY }}
+                    state={{
+                      nttId: nttId,
+                      bbsId: bbsId,
+                      searchCondition: searchCondition,
+                    }}
+                    className="btn btn_skyblue_h46 w_100"
+                  >
+                    수정
+                  </Link>
+                  <Link
+                    to={{ pathname: URL.INFORM_NOTICE_DELETE }}
+                    state={{
+                      nttId: nttId,
+                      bbsId: bbsId,
+                      searchCondition: searchCondition,
+                    }}
+                    className="btn btn_orange_h46 w_100"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onClickDeleteBoardArticle(
+                        boardDetail.bbsId,
+                        boardDetail.nttId
+                      );
+                    }}
+                  >
+                    삭제2
+                  </Link>
                   <Link
                     to={{ pathname: URL.ADMIN_NOTICE }}
                     state={{

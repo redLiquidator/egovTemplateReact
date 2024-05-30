@@ -147,13 +147,10 @@ function EgovAdminNoticeList(props) {
 
           <div className="contents NOTICE_LIST" id="contents">
             {/* <!-- 본문 --> */}
-
             <div className="top_tit">
               <h1 className="tit_1">사이트관리</h1>
             </div>
-
             <h2 className="tit_2">{masterBoard && masterBoard.bbsNm}</h2>
-
             {/* <!-- 검색조건 --> */}
             <div className="condition">
               <ul>
@@ -215,7 +212,6 @@ function EgovAdminNoticeList(props) {
               </ul>
             </div>
             {/* <!--// 검색조건 --> */}
-
             {/* <!-- 게시판목록 --> */}
             <div className="board_list BRD002">
               <div className="head">
@@ -223,12 +219,11 @@ function EgovAdminNoticeList(props) {
                 <span>제목</span>
                 <span>작성자</span>
                 <span>작성일</span>
-                <span>조회수</span>
+                <span>조회수al</span>
               </div>
               <div className="result">{listTag}</div>
             </div>
             {/* <!--// 게시판목록 --> */}
-
             <div className="board_bot">
               {/* <!-- Paging --> */}
               <EgovPaging
@@ -242,7 +237,20 @@ function EgovAdminNoticeList(props) {
                   });
                 }}
               />
+
               {/* <!--/ Paging --> */}
+            </div>
+            <div className="left_col btn3">
+              <Link
+                to={{ pathname: URL.ADMIN_NOTICE_CREATE }}
+                state={{
+                  nttId: "nttId",
+                  bbsId: "bbsId",
+                }}
+                className="btn btn_skyblue_h46 w_100"
+              >
+                등록
+              </Link>
             </div>
 
             {/* <!--// 본문 --> */}

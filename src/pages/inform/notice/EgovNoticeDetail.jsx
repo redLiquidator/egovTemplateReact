@@ -122,7 +122,7 @@ function EgovNoticeDetail(props) {
                     <dd>{boardDetail && boardDetail.frstRegisterPnttm}</dd>
                   </dl>
                   <dl>
-                    <dt>조회수</dt>
+                    <dt>조회수n</dt>
                     <dd>{boardDetail && boardDetail.inqireCo}</dd>
                   </dl>
                 </div>
